@@ -99,3 +99,6 @@ const weapons = [
     power: 250,
   },
 ];
+
+console.table(fighters);
+console.table(weapons);
