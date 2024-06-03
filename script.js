@@ -103,6 +103,7 @@ const weapons = [
 let fightersWithWeapons = [];
 let trainedFightersWithWeapons = [];
 let filteredTrainedFighters = [];
+let winningFighters = [];
 
 console.table(fighters);
 console.table(weapons);
@@ -148,13 +149,55 @@ function FilterFighter() {
   filteredTrainedFighters = trainedFightersWithWeapons.filter(
     (fighter) => fighter.trainedPower >= 10000
   );
+  filteredTrainedFighters = filteredTrainedFighters.map((fighter) => {
+    return {
+      name: fighter.name,
+      power: fighter.power,
+      trainedPower: fighter.trainedPower,
+    };
+  });
+}
+
+// milestone 4 - combattimento -> pg con potenza maggiore vince
+function checkFightersNumber() {
+  if (filteredTrainedFighters.length % 2 !== 0) {
+    const fighterBot = {
+      name: "Broly",
+      power: 4000,
+
+      trainedPower: 4000 * Math.floor(Math.random() * 101),
+    };
+    filteredTrainedFighters.push(fighterBot);
+    console.table(filteredTrainedFighters);
+  }
+}
+function fight() {
+  checkFightersNumber();
+  while (filteredTrainedFighters.length > 1) {
+    let fighter1 = filteredTrainedFighters[0];
+    let fighter2 = filteredTrainedFighters[1];
+
+    if (fighter1.trainedPower > fighter2.trainedPower) {
+      console.log(`${fighter1.name} ha vinto! contro ${fighter2.name}`);
+      winningFighters.push(fighter1);
+    } else if (fighter1.trainedPower < fighter2.trainedPower) {
+      console.log(`${fighter2.name} ha vinto! contro ${fighter1.name}`);
+      winningFighters.push(fighter2);
+    } else {
+      console.log(`Pareggio!`);
+    }
+    filteredTrainedFighters.splice(0, 2);
+  }
 }
 
 ChooseWeapon(weapons, fighters);
-console.table(fightersWithWeapons);
+// console.table(fightersWithWeapons);
 
 TrainingFighter();
-console.table(trainedFightersWithWeapons);
+// console.table(trainedFightersWithWeapons);
 
 FilterFighter();
 console.table(filteredTrainedFighters);
+
+fight();
+console.table(winningFighters);
