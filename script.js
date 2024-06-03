@@ -100,5 +100,61 @@ const weapons = [
   },
 ];
 
+let fightersWithWeapons = [];
+let trainedFightersWithWeapons = [];
+let filteredTrainedFighters = [];
+
 console.table(fighters);
 console.table(weapons);
+
+// milestone 1 scelta dell'arma
+function ChooseWeapon(weapons, fighters) {
+  // funzione per mescolare l'array
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  //   mescolo l'array delle weapons
+  const shuffledWeapons = shuffleArray([...weapons]);
+
+  // Assegna le weapon ai fighters
+  fightersWithWeapons = fighters.map((fighter, i) => {
+    return {
+      ...fighter,
+      weaponIndex: weapons.findIndex(
+        (weapon) => weapon.name === shuffledWeapons[i].name
+      ),
+      weaponName: shuffledWeapons[i].name,
+      weaponPower: shuffledWeapons[i].power,
+    };
+  });
+}
+
+// milestone 2 allenamento fighters
+function TrainingFighter() {
+  trainedFightersWithWeapons = fightersWithWeapons.map((fighter) => ({
+    ...fighter,
+    trainedPower:
+      (fighter.power + fighter.weaponPower) * Math.floor(Math.random() * 101),
+  }));
+}
+
+// milestone 3 qualificazione -> filtraggio dei fighters
+function FilterFighter() {
+  filteredTrainedFighters = trainedFightersWithWeapons.filter(
+    (fighter) => fighter.trainedPower >= 10000
+  );
+}
+
+ChooseWeapon(weapons, fighters);
+console.table(fightersWithWeapons);
+
+TrainingFighter();
+console.table(trainedFightersWithWeapons);
+
+FilterFighter();
+console.table(filteredTrainedFighters);
