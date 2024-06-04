@@ -1,0 +1,200 @@
+body {
+  height: 200vh;
+}
+
+ul {
+  list-style: none;
+}
+
+#page-start {
+  background-image: url("https://wallpapers.com/images/featured/dragon-ball-z-3izrb2kvqsbl3tun.jpg");
+
+  /* Set a specific height */
+  min-height: 100vh;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: min-content;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+#page-start .container {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: 100%;
+  margin-top: 2rem;
+  /* background-color: bisque; */
+}
+#page-start .container .img-wrapper {
+  /* background-color: aqua; */
+  background-color: #2121219b;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 1000px;
+  height: 500px;
+}
+
+#page-start .container .img-wrapper img {
+  height: 100%;
+  width: 100%;
+}
+
+/* start button  */
+.button {
+  cursor: pointer;
+  position: relative;
+  padding: 10px 24px;
+  font-size: 18px;
+  color: rgb(193, 163, 98);
+  border: 2px solid rgb(193, 163, 98);
+  border-radius: 34px;
+  background-color: transparent;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  scale: 0;
+  z-index: -1;
+  background-color: rgb(193, 163, 98);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.button:hover::before {
+  scale: 3;
+}
+
+.button:hover {
+  color: #212121;
+  scale: 1.1;
+  box-shadow: 0 0px 20px rgba(193, 163, 98, 0.4);
+}
+
+.button:active {
+  scale: 1;
+}
+
+#tournament-characters-section .img-wrapper,
+#tournament-weapon-section .img-wrapper,
+#tournament-brackets .img-wrapper {
+  position: relative;
+  aspect-ratio: 2/3;
+  display: flex;
+  align-items: end;
+}
+
+#tournament-characters-section img,
+#tournament-weapon-section img,
+#tournament-brackets img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+}
+#tournament-characters-section .img-overlay,
+#tournament-weapon-section .img-overlay,
+#tournament-brackets .img-overlay {
+  background-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  background-size: 100% 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.img-overlay .card-detail,
+.img-overlay .card-detail {
+  color: rgb(255, 255, 255);
+  background-color: white;
+  width: 100%;
+  font-size: 1rem;
+  position: absolute;
+  bottom: 0;
+  height: 0px;
+  /* opacity: 0; */
+}
+.img-overlay > h2,
+.img-overlay > h3 {
+  color: rgb(255, 255, 255);
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  position: absolute;
+  bottom: 1rem;
+  transition: all linear 0.15s;
+}
+
+.img-overlay .card-detail h2,
+.img-overlay .card-detail h3 {
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  opacity: 0;
+}
+.img-overlay .card-detail p {
+  position: absolute;
+  color: rgb(0, 0, 0);
+
+  bottom: -1rem;
+  opacity: 0;
+}
+
+.img-overlay:hover .card-detail p {
+  position: static;
+  bottom: 1rem;
+  opacity: 1;
+  transition: all linear 0.25s;
+  margin-bottom: 0;
+  font-size: 0.85rem;
+}
+.img-overlay:hover .card-detail h2 {
+  opacity: 1;
+  transition: all linear 0.15s;
+  font-size: 1.5rem;
+}
+
+.img-overlay:hover .card-detail {
+  opacity: 0.75;
+  height: 50%;
+  padding: 0.5rem;
+
+  transition: all linear 0.15s;
+}
+.img-overlay:hover .card-detail.trained {
+  opacity: 0.75;
+  background: rgb(255, 115, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 115, 0, 1) 0%,
+    rgba(255, 201, 0, 1) 100%
+  );
+  height: 80%;
+  padding: 0.5rem;
+
+  transition: all linear 0.15s;
+}
+.img-overlay:hover > h2 {
+  opacity: 0;
+}

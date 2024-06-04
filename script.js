@@ -33,6 +33,47 @@ let trainedFightersWithWeapons = [];
 let filteredTrainedFighters = [];
 let winningFighters = [];
 
+const startButton = document.getElementById("start-tournament");
+const TrainButton = document.getElementById("train-button");
+const nextFightButton = document.getElementById("next-fight");
+const TournamentCharacterSection = document.getElementById(
+  "tournament-characters"
+);
+const TournamentWeaponsrSection = document.getElementById("tournament-weapons");
+const TournamentBrackets = document.getElementById("tournament-brackets");
+
+fighters.forEach((fighter) => {
+  TournamentCharacterSection.innerHTML += `
+  <div class="col">
+  <div class="img-wrapper bg-light">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsb3ipZexAsmxnHO_6FDIAKUA7aOovFj4p0A&s" />
+  <div class="img-overlay">
+  <h2 class="card-text">${fighter.name}</h2>
+  <div class="card-detail">
+  <h2 class="card-text">${fighter.name}</h2>
+  <p><strong>Power:</strong> ${fighter.power}</p>
+  </div>
+  </div>
+  </div>
+  </div>`;
+});
+weapons.forEach((weapon) => {
+  TournamentWeaponsrSection.innerHTML += `
+  <div class="col">
+  <div class="img-wrapper bg-light">
+  <img src="https://i.pinimg.com/originals/92/b4/97/92b49766c818b5fac6e8781913fd13f3.png" />
+
+  <div class="img-overlay">
+  <h2 class="card-text">${weapon.name}</h2>
+  <div class="card-detail">
+  <h2 class="card-text">${weapon.name}</h2>
+  <p><strong>Power:</strong> ${weapon.power}</p>
+  </div>
+  </div>
+  </div>
+  </div>`;
+});
+
 // milestone 1 scelta dell'arma
 function ChooseWeapon(weapons, fighters) {
   // funzione per mescolare l'array
@@ -67,6 +108,25 @@ function TrainingFighter() {
     trainedPower:
       (fighter.power + fighter.weaponPower) * Math.floor(Math.random() * 101),
   }));
+  TournamentCharacterSection.innerHTML = "";
+  trainedFightersWithWeapons.forEach((fighter) => {
+    TournamentCharacterSection.innerHTML += `
+    <div class="col">
+    <div class="img-wrapper bg-light">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsb3ipZexAsmxnHO_6FDIAKUA7aOovFj4p0A&s" />
+    <div class="img-overlay">
+    <h2 class="card-text">${fighter.name}</h2>
+    <div class="card-detail trained">
+    <h2 class="card-text">${fighter.name}</h2>
+    <p><strong>Power:</strong> ${fighter.power}</p>
+    <p><strong>Weapon:</strong> ${fighter.weaponName}</p>
+    <p><strong>Weapon Power:</strong> ${fighter.weaponPower}</p>
+    <p><strong>Final Power:</strong> ${fighter.trainedPower}</p>
+    </div>
+    </div>
+    </div>
+    </div>`;
+  });
 }
 
 // milestone 3 qualificazione -> filtraggio dei fighters
@@ -100,11 +160,39 @@ function fight(array) {
   checkFightersNumber(array);
 
   console.table(array);
-  let roundWinners = [];
 
+  let roundWinners = [];
+  TournamentBrackets.innerHTML = "";
   while (array.length > 1) {
     let fighter1 = array.shift();
     let fighter2 = array.shift();
+
+    TournamentBrackets.innerHTML += `            
+    <li class="col">
+      <div
+        class="bg-light text-center d-flex justify-content-center align-items-center gap-3"
+      >
+      <div class="img-wrapper">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsb3ipZexAsmxnHO_6FDIAKUA7aOovFj4p0A&s"
+          alt=""
+        />
+        <div class="img-overlay">
+          <h3>${fighter1.name}</h3>
+        </div>
+      </div>
+      <h3>VS</h3>
+      <div class="img-wrapper">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsb3ipZexAsmxnHO_6FDIAKUA7aOovFj4p0A&s"
+          alt=""
+        />
+        <div class="img-overlay">
+          <h3>${fighter2.name}</h3>
+        </div>
+      </div>
+    </div>
+  </li>`;
 
     if (fighter1.trainedPower > fighter2.trainedPower) {
       console.log(`${fighter1.name} ha vinto contro ${fighter2.name}`);
@@ -112,6 +200,12 @@ function fight(array) {
     } else if (fighter1.trainedPower < fighter2.trainedPower) {
       console.log(`${fighter2.name} ha vinto contro ${fighter1.name}`);
       roundWinners.push(fighter2);
+    } else if (fighter1.power < fighter2.power) {
+      console.log(`${fighter2.name} ha vinto contro ${fighter1.name}`);
+      roundWinners.push(fighter2);
+    } else if (fighter1.power > fighter2.power) {
+      console.log(`${fighter1.name} ha vinto contro ${fighter2.name}`);
+      roundWinners.push(fighter1);
     } else {
       console.log(`Pareggio! Nessuno avanza.`);
     }
@@ -143,50 +237,58 @@ function startTournament() {
   console.warn(`======================Weapon List======================`);
   console.table(weapons);
 
+  // setTimeout(() => {
+  //   console.warn(`======================Getting Weapons======================`);
+  //   ChooseWeapon(weapons, fighters);
+  //   console.table(fightersWithWeapons);
+
+  //   setTimeout(() => {
+  //     console.warn(`======================Training======================`);
+  //     TrainingFighter();
+  //     console.table(trainedFightersWithWeapons);
+
   setTimeout(() => {
-    console.warn(`======================Getting Weapons======================`);
-    ChooseWeapon(weapons, fighters);
-    console.table(fightersWithWeapons);
+    console.warn(`======================Qualification======================`);
+    FilterFighter();
+    console.table(filteredTrainedFighters);
 
-    setTimeout(() => {
-      console.warn(`======================Training======================`);
-      TrainingFighter();
-      console.table(trainedFightersWithWeapons);
+    let i = 0;
+    function nextFightRound() {
+      if (filteredTrainedFighters.length > 3) {
+        i++;
+        console.warn(`======================Round ${i}======================`);
+        filteredTrainedFighters = fight(filteredTrainedFighters);
+        winningFighters = [...filteredTrainedFighters];
+      } else if (filteredTrainedFighters.length > 1) {
+        i++;
+        console.warn(`======================Round ${i}======================`);
+        filteredTrainedFighters = fight(filteredTrainedFighters);
+      } else {
+        console.warn(`======================Podium======================`);
+        podium(winningFighters);
+      }
+    }
 
-      setTimeout(() => {
-        console.warn(
-          `======================Qualification======================`
-        );
-        FilterFighter();
-        console.table(filteredTrainedFighters);
-
-        let i = 0;
-        function nextFightRound() {
-          if (filteredTrainedFighters.length > 3) {
-            i++;
-            console.warn(
-              `======================Round ${i}======================`
-            );
-            filteredTrainedFighters = fight(filteredTrainedFighters);
-            winningFighters = [...filteredTrainedFighters];
-            setTimeout(nextFightRound, 2000);
-          } else if (filteredTrainedFighters.length > 1) {
-            i++;
-            console.warn(
-              `======================Round ${i}======================`
-            );
-            filteredTrainedFighters = fight(filteredTrainedFighters);
-            setTimeout(nextFightRound, 2000);
-          } else {
-            console.warn(`======================Podium======================`);
-            podium(winningFighters);
-          }
-        }
-
-        nextFightRound();
-      }, 1000);
-    }, 2000);
-  }, 2000);
+    nextFightRound();
+  }, 1000);
+  //   }, 2000);
+  // }, 2000);
 }
 
-startTournament();
+startButton.addEventListener("click", function () {
+  startTournament();
+});
+
+nextFightButton.addEventListener("click", function () {
+  // Esegui il combattimento
+  filteredTrainedFighters = fight(filteredTrainedFighters);
+});
+
+TrainButton.addEventListener("click", function () {
+  console.warn(`======================Getting Weapons======================`);
+  ChooseWeapon(weapons, fighters);
+  console.table(fightersWithWeapons);
+  console.warn(`======================Training======================`);
+  TrainingFighter();
+  console.table(trainedFightersWithWeapons);
+});
