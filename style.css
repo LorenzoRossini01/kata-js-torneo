@@ -1,5 +1,6 @@
 body {
   height: 200vh;
+  background-color: black;
 }
 
 ul {
@@ -91,27 +92,49 @@ ul {
   scale: 1;
 }
 
-#tournament-characters-section .img-wrapper,
-#tournament-weapon-section .img-wrapper,
-#tournament-brackets .img-wrapper {
+.hidden {
+  display: none;
+}
+
+.img-wrapper {
   position: relative;
   aspect-ratio: 2/3;
   display: flex;
   align-items: end;
 }
 
-#tournament-characters-section img,
-#tournament-weapon-section img,
-#tournament-brackets img {
+#tournament-brackets .img-wrapper {
+  aspect-ratio: 1/2;
+  width: 100%;
+  height: 100%;
+}
+
+#tournament-brackets .img-wrapper h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+#tournament-brackets .img-wrapper.loser {
+  border: 1px solid red !important;
+}
+
+#tournament-brackets .img-wrapper.loser h3 {
+  color: red !important;
+  font-weight: 800;
+}
+
+#tournament-brackets .img-wrapper.loser img {
+  filter: grayscale(100%);
+}
+
+.img-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: top;
   overflow: hidden;
 }
-#tournament-characters-section .img-overlay,
-#tournament-weapon-section .img-overlay,
-#tournament-brackets .img-overlay {
+
+.img-overlay {
   background-image: linear-gradient(
     0deg,
     rgba(0, 0, 0, 1) 0%,
@@ -128,7 +151,7 @@ ul {
 .img-overlay .card-detail,
 .img-overlay .card-detail {
   color: rgb(255, 255, 255);
-  background-color: white;
+  background-color: rgb(0, 0, 0);
   width: 100%;
   font-size: 1rem;
   position: absolute;
@@ -149,13 +172,13 @@ ul {
 
 .img-overlay .card-detail h2,
 .img-overlay .card-detail h3 {
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   font-size: 1rem;
   opacity: 0;
 }
 .img-overlay .card-detail p {
   position: absolute;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
 
   bottom: -1rem;
   opacity: 0;
@@ -197,4 +220,28 @@ ul {
 }
 .img-overlay:hover > h2 {
   opacity: 0;
+}
+
+#round-winners {
+  max-height: 500px;
+}
+
+#round-winners .img-wrapper {
+  max-width: 300px;
+  margin: auto;
+}
+
+#podium-list col:nth-of-type(1) .img-wrapper {
+  height: 300px; /* Altezza del riquadro a destra */
+  margin: auto; /* Centrato orizzontalmente */
+}
+
+#podium-list col:nth-of-type(2) .img-wrapper {
+  height: 700px; /* Altezza del riquadro centrale */
+  margin: 0 20px; /* Margine sinistro e destro per allinearlo a destra */
+}
+
+#podium-list col:nth-of-type(3) .img-wrapper {
+  height: 400px; /* Altezza del riquadro a sinistra */
+  margin: auto; /* Centrato orizzontalmente */
 }

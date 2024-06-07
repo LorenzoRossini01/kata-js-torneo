@@ -12,7 +12,7 @@
     />
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body class="bg-dark">
+  <body>
     <main>
       <section id="page-start">
         <div class="container">
@@ -31,76 +31,63 @@
         <h2 class="text-white text-center">Characters</h2>
         <div class="row row-cols-6 g-3" id="tournament-characters"></div>
       </section>
-      <section class="start-tournament bg-dark py-4 text-center">
-        <button class="button" id="train-button">Start Training</button>
-      </section>
+      <div class="d-flex justify-content-center gap-3">
+        <section class="start-tournament py-4 text-center">
+          <button class="button" id="train-button">Start Training</button>
+        </section>
+        <section class="start-tournament py-4 text-center">
+          <button class="button" id="weapon-button">Get Weapon</button>
+        </section>
+      </div>
       <section
         id="tournament-weapon-section"
-        class="container d-flex flex-column justify-content-center py-3 bg-dark"
+        class="container d-flex flex-column justify-content-center py-3"
       >
         <h2 class="text-white text-center">Weapons</h2>
         <div class="row row-cols-6 g-3" id="tournament-weapons"></div>
       </section>
 
-      <section class="start-tournament bg-dark py-4 text-center">
+      <section class="start-tournament py-4 text-center">
         <button class="button" id="start-tournament">Start Tournament</button>
       </section>
 
-      <section class="bg-dark py-4">
+      <section class="py-4">
         <h2 class="text-white text-center">Tournament Brackets</h2>
         <div class="container-fluid">
           <ul
-            class="row row-cols-5 g-3 d-flex justify-content-center"
+            class="row g-3 d-flex justify-content-center tournament-brackets"
             id="tournament-brackets"
-          >
-            <!-- <li class="col">
-              <div
-                class="bg-light text-center d-flex justify-content-center align-items-center gap-3"
-              >
-                <div class="img-wrapper">
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsb3ipZexAsmxnHO_6FDIAKUA7aOovFj4p0A&s"
-                    alt=""
-                  />
-                  <div class="img-overlay">
-                    <h3>Personaggio1</h3>
-                  </div>
-                </div>
-                <h3>VS</h3>
-                <div class="img-wrapper">
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsb3ipZexAsmxnHO_6FDIAKUA7aOovFj4p0A&s"
-                    alt=""
-                  />
-                  <div class="img-overlay">
-                    <h3>Personaggio2</h3>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col">
-              <div
-                class="bg-light text-center d-flex justify-content-center align-items-center gap-3"
-              >
-                <div class="">Personaggio1</div>
-                <h3>VS</h3>
-                <div class="">Personaggio2</div>
-              </div>
-            </li>
-            <li class="col">
-              <div
-                class="bg-light text-center d-flex justify-content-center align-items-center gap-3"
-              >
-                <div class="">Personaggio1</div>
-                <h3>VS</h3>
-                <div class="">Personaggio2</div>
-              </div>
-            </li> -->
-          </ul>
+          ></ul>
+
+          <ul
+            class="row g-3 d-flex justify-content-center"
+            id="round-winners"
+          ></ul>
         </div>
       </section>
-      <section class="bg-dark py-4 text-center">
+      <section class="py-4 text-center" id="next-fight-container">
         <button class="button" id="next-fight">Next round</button>
+      </section>
+
+      <section id="podium" class="hidden">
+        <h2 class="text-white text-center">Podium</h2>
+        <div class="container-fluid text-center">
+          <ul class="row g-3 d-flex justify-content-around text-white">
+            <li class="col">
+              <h2>2</h2>
+            </li>
+            <li class="col">
+              <h2>1</h2>
+            </li>
+            <li class="col">
+              <h2>3</h2>
+            </li>
+          </ul>
+          <div
+            class="row g-3 d-flex justify-content-center"
+            id="podium-list"
+          ></div>
+        </div>
       </section>
     </main>
 
