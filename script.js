@@ -84,13 +84,16 @@ const roundWinnersList = document.getElementById("round-winners");
 const TournamentBracketsRow = document.querySelector(".tournament-brackets");
 const podiumListElement = document.getElementById("podium-list");
 
+console.table(fighters);
+console.table(weapons);
+
 // aggiunta immagine all'array
 function addImgToArray(array1, array2) {
   for (let i = 0; i < array1.length; i++) {
     array2[i].image = array1[i];
   }
 
-  console.table(fighters);
+  // console.table(fighters);
 }
 
 // stampa card in pagina
@@ -129,18 +132,23 @@ function printCard(element, item) {
 }
 
 // milestone 1 scelta dell'arma
+
+function shuffleArray(array) {
+  // Ciclo l'array dall'ultimo elemento al primo
+  for (let i = array.length - 1; i > 0; i--) {
+    //Genero un index random i2
+    const i2 = Math.floor(Math.random() * (i + 1));
+    // Scambio gli elementi con index i con quelli con index i2
+    [array[i], array[i2]] = [array[i2], array[i]];
+  }
+  // ritorno l'array mescolato
+  return array;
+}
 function ChooseWeapon(weapons, fighters) {
   // funzione per mescolare l'array
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
 
   //   mescolo l'array delle weapons
-  const shuffledWeapons = shuffleArray([...weapons]);
+  const shuffledWeapons = shuffleArray(weapons);
 
   // Assegna le weapon ai fighters
   fightersWithWeapons = fighters.map((fighter, i) => {
@@ -168,13 +176,15 @@ function TrainingFighter() {
     tranedFighters = fightersWithWeapons.map((fighter) => ({
       ...fighter,
       power:
-        fighter.power + fighter.weaponPower * Math.floor(Math.random() * 101),
+        fighter.power +
+        fighter.weaponPower * (Math.floor(Math.random() * 100) + 1),
     }));
     if (roundWinners.length > 0) {
       roundWinners = roundWinners.map((fighter) => ({
         ...fighter,
         power:
-          fighter.power + fighter.weaponPower * Math.floor(Math.random() * 101),
+          fighter.power +
+          fighter.weaponPower * (Math.floor(Math.random() * 100) + 1),
       }));
     }
   } else {
@@ -186,7 +196,8 @@ function TrainingFighter() {
       roundWinners = roundWinners.map((fighter) => ({
         ...fighter,
         power:
-          fighter.power + fighter.weaponPower * Math.floor(Math.random() * 101),
+          fighter.power +
+          fighter.weaponPower * (Math.floor(Math.random() * 100) + 1),
       }));
     }
   }
@@ -297,7 +308,7 @@ function fight(array) {
 // milestone 5 - premiazione -> i combattenti con il livello di forza maggiore arrivano sul podio
 function podium(array) {
   array.reverse();
-  console.log(array);
+  // console.log(array);
   // array.sort((a, b) => b.trainedPower - a.trainedPower);
   // console.table(array);
 
