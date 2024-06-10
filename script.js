@@ -213,15 +213,12 @@ function TrainingFighter() {
 
 // milestone 3 qualificazione -> filtraggio dei fighters
 function FilterFighter() {
-  if (isTrained) {
-    filteredTrainedFighters = tranedFighters.filter(
-      (fighter) => fighter.power >= 10000
-    );
-  } else {
-    filteredTrainedFighters = fighters.filter(
-      (fighter) => fighter.power >= 2000
-    );
-  }
+  const minPower = isTrained ? 10000 : 2000;
+
+  filteredTrainedFighters = (isTrained ? tranedFighters : fighters).filter(
+    (fighter) => fighter.power >= minPower
+  );
+
   filteredTrainedFighters = filteredTrainedFighters.map((fighter) => {
     return {
       name: fighter.name,
